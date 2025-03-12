@@ -6,10 +6,8 @@ import Footer from './components/Footer';
 
 const IndexSchoolClub = async () => {
 
-  {/* $sql = "SELECT id, clubName, clubDescription FROM clubs WHERE clubApplication = 0 order by RAND() limit 3;"; */}
 
   const clubCount = await prisma.club.count()
-  console.log(clubCount)
   
   const clubs = await prisma.club.findMany({
     
@@ -24,11 +22,10 @@ const IndexSchoolClub = async () => {
     },
     
     take: 3, 
-    skip: (clubCount >= 3) ? randomInteger(0, clubCount - 1) : 0
+    skip: (clubCount > 3) ? randomInteger(0, clubCount - 1) : 0
 
   });
-
-  const postCount = await prisma.post.count();
+  
   const actualClubCount = clubs.length
   return (
     <div>
