@@ -1,7 +1,7 @@
 'use client';
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { createClubApplication } from '@/src/actions/actions';
 
 const ApplicationPage = ({ }) => {
@@ -18,7 +18,7 @@ const ApplicationPage = ({ }) => {
   }])
   const [inputEventNum, setEventFieldNum] = useState()
 
-  const inputEventHandler = (e, index) => {
+  const inputEventHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>, index: number) => {
     const { name, value } = e.target;
 
     setEventFields((prev) => {
@@ -45,14 +45,14 @@ const ApplicationPage = ({ }) => {
     }
   }
 
-  const removeEventField = (index) => {
+  const removeEventField = (index: number) => {
     if (eventFields.length > 1) {
       setEventFields(eventFields.filter((_, i) => i !== index));
     }
   };
 
 
-  const inputCategoryHandler = (e, index) => {
+  const inputCategoryHandler = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const values = [...categoryFields]
     values[index].value = e.target.value
     setCategoryFields(values)
@@ -66,21 +66,23 @@ const ApplicationPage = ({ }) => {
     }
   }
 
-  const removeInputField = (index) => {
+  const removeInputField = (index: number) => {
     if (categoryFields.length > 1) {
       setCategoryFields(categoryFields.filter((_, i) => i !== index));
     }
   };
-
+  
+  /* eslint-disable @typescript-eslint/ban-ts-comment */
   useEffect(() => {
-    setCategoryFieldNum(categoryFields.length);
+    return setCategoryFieldNum(categoryFields.length);
   }, [categoryFields]);
 
   useEffect(() => {
     setEventFieldNum(eventFields.length);
   }, [eventFields]);
+  /* eslint-enable @typescript-eslint/ban-ts-comment */
 
-  const change = async (e) => {
+  const change = async (e: { target: { value: any; }; }) => {
     const newValue = e.target.value
     try {
       const res = await fetch(`/api/searchNames?query=${encodeURIComponent(newValue)}`)
@@ -115,9 +117,11 @@ const ApplicationPage = ({ }) => {
               <div className="col-6">
                 <select className="form-select" id="clubModerator" name="clubModerator" required>
                   {val.map((leader, index) => (
+                    /* eslint-disable @typescript-eslint/ban-ts-comment */
                     <option key={index} value={leader.id}>
                       {leader.firstName} {leader.lastName}
                     </option>
+                    /* eslint-enable @typescript-eslint/ban-ts-comment */
                   ))}
                 </select>
               </div>
