@@ -26,7 +26,6 @@ const IndexSchoolClub = async () => {
 
   });
   
-  const actualClubCount = clubs.length
   return (
     <div>
       <div>
@@ -39,7 +38,7 @@ const IndexSchoolClub = async () => {
           <img src="/hero-background.jpg" className="img-fluid border rounded" alt="school image"></img>
           {/* Text overlay for the hero section */}
           <div className="position-absolute text-shadow text-center top-50 start-50 translate-middle">
-            <h1 style={{fontSize: "calc(1.1rem + 1vw)"}} className="display-4 text-white"><strong>Welcome to Jt's Club/Group Website</strong></h1>
+            <h1 style={{fontSize: "calc(1.1rem + 1vw)"}} className="display-4 text-white"><strong>Welcome to {"Jt's"} Club/Group Website</strong></h1>
             <h3 style={{fontSize: "calc(0.5rem + 1vw)"}} className="text-white">Your source for information about clubs and groups.</h3>
           </div>
         </div>

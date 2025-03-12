@@ -22,7 +22,7 @@ const ApplicationPage = ({ }) => {
     const { name, value } = e.target;
 
     setEventFields((prev) => {
-      let updatedFields = [...prev];
+      const updatedFields = [...prev];
       updatedFields[index] = { ...updatedFields[index], [name]: value };
       return updatedFields;
     });

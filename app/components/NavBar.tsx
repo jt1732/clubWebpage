@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const NavBar = () => {
@@ -8,7 +9,7 @@ const NavBar = () => {
         <nav className="navbar navbar-expand-lg bg-body-tertiary nav-pills">
             <div className="container-fluid">
                 {/* Brand/logo for the navbar */}
-                <a className="navbar-brand me-4 mb-1" href="/">Jt</a>
+                <Link className="navbar-brand me-4 mb-1" href="/">Jt</Link>
                 {/* Button for toggling the navbar on smaller screens */}
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -17,21 +18,21 @@ const NavBar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item me-4">
-                            <a className="nav-link btn light mb-1" aria-current="page" href="/">Home</a>
+                            <Link className="nav-link btn light mb-1" aria-current="page" href="/">Home</Link>
                         </li>
                         <li className="nav-item me-4">
-                            <a className="nav-link btn light mb-1" href='/clubs/1'>Clubs</a>
+                            <Link className="nav-link btn light mb-1" href='/clubs/1'>Clubs</Link>
                         </li>
                         <li className="nav-item me-4">
-                            <a className=" nav-link btn light mb-1" href='/events/1'>Events</a>
+                            <Link className=" nav-link btn light mb-1" href='/events/1'>Events</Link>
                         </li>
                         <li className="nav-item me-4">
-                            <a className="nav-link btn light" href='/applications'>Apply</a>
+                            <Link className="nav-link btn light" href='/applications'>Apply</Link>
                         </li>
                         </ul>
                         {/* Navigation link for admin login */}
                         <div className="d-flex justify-content-center">
-                            <a className="btn btn-success me-4 mb-1 text-center" href='login.php'>Admin</a>
+                            <Link className="btn btn-success me-4 mb-1 text-center" href='/'>Admin</Link>
                         </div>
 
                         {/* Form to search for clubs, leaders, categories, or meeting days */}
