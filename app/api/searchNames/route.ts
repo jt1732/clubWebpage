@@ -6,10 +6,10 @@ const prisma = new PrismaClient();
 
 export async function GET(req: Request) {
 
-    const { searchParams } = new URL(req.url);
-    const query = searchParams.get('query') || '';
-
     try {
+
+        const { searchParams } = new URL(req.url);
+        const query = searchParams.get('query') || '';
 
         if (query == ''){
             
