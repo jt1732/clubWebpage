@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client';
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
@@ -6,17 +8,23 @@ import { createClubApplication } from '@/src/actions/actions';
 
 const ApplicationPage = ({ }) => {
 
+  interface Leader {
+    id: number;
+    firstName: string;
+    lastName: string;
+  }
+
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const [val, setVal] = useState([])
+  const [val, setVal] = useState<Leader[]>([])
   const [categoryFields, setCategoryFields] = useState([{ value: "" }])
-  const [inputCategoryNum, setCategoryFieldNum] = useState()
+  const [inputCategoryNum, setCategoryFieldNum] = useState<number>(0)
   const [eventFields, setEventFields] = useState([{
     eventDay: "",
     eventTime: "",
     eventDescription: "",
     eventLocation: "",
   }])
-  const [inputEventNum, setEventFieldNum] = useState()
+  const [inputEventNum, setEventFieldNum] = useState<number>(0)
 
   const inputEventHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>, index: number) => {
     const { name, value } = e.target;
@@ -72,7 +80,6 @@ const ApplicationPage = ({ }) => {
     }
   };
   
-  /* eslint-disable @typescript-eslint/ban-ts-comment */
   useEffect(() => {
     return setCategoryFieldNum(categoryFields.length);
   }, [categoryFields]);
@@ -80,7 +87,6 @@ const ApplicationPage = ({ }) => {
   useEffect(() => {
     setEventFieldNum(eventFields.length);
   }, [eventFields]);
-  /* eslint-enable @typescript-eslint/ban-ts-comment */
 
   const change = async (e: { target: { value: any; }; }) => {
     const newValue = e.target.value
@@ -117,11 +123,9 @@ const ApplicationPage = ({ }) => {
               <div className="col-6">
                 <select className="form-select" id="clubModerator" name="clubModerator" required>
                   {val.map((leader, index) => (
-                    /* eslint-disable @typescript-eslint/ban-ts-comment */
                     <option key={index} value={leader.id}>
                       {leader.firstName} {leader.lastName}
                     </option>
-                    /* eslint-enable @typescript-eslint/ban-ts-comment */
                   ))}
                 </select>
               </div>

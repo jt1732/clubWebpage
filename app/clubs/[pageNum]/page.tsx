@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import NavBar from '../../components/NavBar'
 import Footer from '../../components/Footer'
 import { prisma } from '@/src/lib/db'
 import Link from 'next/link'
 
-const ClubPage = async ({ params }) => {
-  const pageNum = parseInt(params.pageNum);
+const ClubPage = async ({params} : { params: any}) => {
+  const { pageNum } = await params;
   const limit = 15
 
     const clubs = await prisma.club.findMany({
