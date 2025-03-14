@@ -16,13 +16,13 @@ const IndexSchoolClub = async () => {
     },
 
     select: {
+      
       id: true,
       clubName: true,
       clubDescription: true,
     },
     
     take: 3, 
-    skip: (clubCount > 3) ? randomInteger(0, clubCount - 1) : 0
 
   });
   

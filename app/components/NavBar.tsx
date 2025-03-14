@@ -32,24 +32,24 @@ const NavBar = () => {
                         </ul>
                         {/* Navigation link for admin login */}
                         <div className="d-flex justify-content-center">
-                            <Link className="btn btn-success me-4 mb-1 text-center" href='/'>Admin</Link>
+                            <Link className="btn btn-success me-4 mb-1 text-center" href='/login'>Admin</Link>
                         </div>
 
                         {/* Form to search for clubs, leaders, categories, or meeting days */}
-                        <form className="d-flex" action="search.php" method="post">
+                        <form className="d-flex" action={`/search`}>
                             <div className="input-group mb-1">
                                 {/* Dropdown to select the search criteria */}
-                                <select name="searchBy" defaultValue={'DEFAULT'} className="form-select" aria-label="Search by">
-                                    <option value="DEFAULT">Search by</option>
+                                <select name="searchBy" defaultValue={'clubName'} className="form-select" aria-label="Search by">
+                                    <option value="clubName">Search by</option>
                                     <option value="clubName">Clubs</option>
                                     <option value="clubModerator">Leaders</option>
-                                    <option value="clubCategory">Category</option>
-                                    <option value="clubEvents">Meeting Day</option>
+                                    <option value="clubCategories">Category</option>
+                                    <option value="clubEvents">Event Name</option>
                                 </select>
                                 {/* Input field for search query */}
                                 <input className="form-control" type="search" placeholder="Search" aria-label="Search" name="action"></input>
                                 {/* Button to trigger the search */}
-                                <button className="btn btn-success" type="submit" name="submit" value="submit">Search</button>
+                                <button className="btn btn-success" type="submit"  value="submit">Search</button>
                             </div>
                         </form>
                     </div>

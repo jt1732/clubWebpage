@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    
-    "postinstall": "prisma generate",
+    "postinstall": "npx prisma generate",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -12,7 +11,9 @@
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",
+    "bcryptjs": "^3.0.2",
     "bootstrap": "^5.3.3",
+    "jose": "^6.0.10",
     "mysql2": "^3.12.0",
     "next": "15.2.1",
     "random-int": "^3.0.0",

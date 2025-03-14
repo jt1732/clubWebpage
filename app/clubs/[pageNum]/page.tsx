@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from 'react'
 import NavBar from '../../components/NavBar'
 import Footer from '../../components/Footer'
@@ -47,7 +48,7 @@ const ClubPage = async ({params} : { params: any}) => {
                             <h3 className="card-title">{club.clubName}</h3>
                             <h6 className="card-subtitle mb-2 text-muted">Moderator: {club.clubModerator.firstName} {club.clubModerator.lastName}</h6>
                             <p className="card-text">{club.clubDescription}</p>
-                            <a className="card-link btn btn-primary" href="clubDetails.php?id=" >View Club Details</a>
+                            <Link className="card-link btn btn-primary" href={`/clubdetails/${club.id}`} >View Club Details</Link>
                         </div>
                     </div>
                 </div>

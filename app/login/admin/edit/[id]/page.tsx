@@ -1,12 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client';
-import NavBar from '../components/NavBar'
-import Footer from '../components/Footer'
-import { ChangeEvent, useEffect, useState } from 'react';
-import { createClubApplication } from '@/src/actions/actions';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { adminLogout, createClub, createClubApplication, sessionAuth } from '@/src/actions/actions';
+import NavBar from '@/app/components/NavBar';
+import Footer from '@/app/components/Footer';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
+const CreateClub = () => {
+  
+  const params = useParams()
+  const id  = params.id
 
-const ApplicationPage = ({ }) => {
+  async function fetchData() {
+    try {
+      const response = await fetch(`/api/club/${id}`)
+      console.log(response);
+    } catch (error) {
+    }
+  }
+  
+  fetchData();
+
+  const router = useRouter()
+      const [session, setSession] = useState(null);
+  
+      useEffect(() => {
+          async function checkSession() {
+            const res = await sessionAuth();
+            if(!res) 
+              router.push('/login/admin/1')
+          }
+      
+          checkSession();
+  
+        }, []);
 
   interface Leader {
     id: number;
@@ -101,12 +129,18 @@ const ApplicationPage = ({ }) => {
   }
 
   return (
-    <div>
+    <div>{session}
       <div>
         <NavBar />
       </div>
+        <div className="mt-3">
+        <Link className="btn btn-primary mb-4" style={{marginRight: '5px'}} href="/login/admin/createClub">Create New Club</Link>
+        <Link className="btn btn-primary mb-4" style={{marginRight: '5px'}} href="/login/admin/createLeader">Create New Leader</Link>
+        <Link className="btn btn-secondary mb-4" style={{marginRight: '5px'}} href="/login/admin/1">View Clubs</Link>
+        <button type="submit" className="btn btn-danger mb-4" style={{ marginRight: '5px' }} onClick={adminLogout}>Log out</button>
+        </div>
       <div>
-        <form action={createClubApplication}>
+        <form action={createClub}>
           <div className="mb-3">
             <label htmlFor="clubName" className="form-label">Club name</label>
             <input type="text" maxLength={32} className="form-control" name="clubName" required placeholder='Club name'></input>
@@ -201,4 +235,4 @@ const ApplicationPage = ({ }) => {
   )
 }
 
-export default ApplicationPage
+export default CreateClub

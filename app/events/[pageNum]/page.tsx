@@ -9,15 +9,24 @@ const EventPage = async ({params} : { params: any}) => {
   const { pageNum } = await params;
   const limit = 15
 
-    const clubs = await prisma.club.findMany({
+    const events = await prisma.event.findMany({
         where: {
-              application: false
+            club: {
+              application: false,
+            }
             },
         
             select: {
-              id: true,
-              clubName: true,
-              clubDescription: true,
+              eventDay: true,
+              eventDescription: true,
+              eventLocation: true,
+              eventName: true,
+              club: {
+                select: {
+                  id: true,
+                  clubName: true,
+                },
+              },
             },
             
             take: limit, 
@@ -29,19 +38,19 @@ const EventPage = async ({params} : { params: any}) => {
         <NavBar />
       </div>
       <div className="container">
-        <p className='mt-3'>Clubs displayed: {clubs.length}</p>
+        <p className='mt-3'>Events displayed: {events.length}</p>
         <div className="row">
-            {clubs.slice(0, limit).map((club, index) => (
-                <React.Fragment key={club.id}>
+            {events.slice(0, limit).map((event, index) => (
+                <React.Fragment key={event.club.id}>
                 {index % 3 == 0 && <div className="w-100"></div>}
 
                 <div className="col-6 col-lg-4 mt-3 mb-5">
                     <div className="card" style={{width: "18rem"}}>
                         <div className="card-body">
-                            <h3 className="card-title">{club.clubName}</h3>
-                            <h6 className="card-subtitle mb-2 text-muted">Moderator WIP</h6>
-                            <p className="card-text">{club.clubDescription}</p>
-                            <a className="card-link btn btn-primary" href="clubDetails.php?id=" >View Club Details</a>
+                            <h3 className="card-title">{event.club.clubName}</h3>
+                            <h6 className="card-subtitle mb-3 text-muted">Event: {event.eventName}</h6>
+                            <p className="card-subtitle mb-4 text-muted">{event.eventDescription} <br /> Location: {event.eventLocation} <br/> Day: {event.eventDay}</p>
+                            <Link className="card-link btn btn-primary" href={`/clubdetails/${event.club.id}`} >View Club Details</Link>
                         </div>
                     </div>
                 </div>
@@ -50,7 +59,7 @@ const EventPage = async ({params} : { params: any}) => {
             ))}
 
             {pageNum > 1  && <Link href={`/events/${pageNum - 1}`}>Previous page</Link>}
-            {clubs.length == limit && <Link href={`/events/${pageNum + 1}`}>Next page</Link>}
+            {events.length == limit && <Link href={`/events/${pageNum + 1}`}>Next page</Link>}
 
         </div>
       </div>
